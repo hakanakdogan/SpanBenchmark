@@ -27,19 +27,16 @@ public class Bench
     private ReadOnlySpan<char> ReplacetermSpan => replaceTerm.AsSpan();
     private ReadOnlySpan<char> StarsWithSpan => startsWith.AsSpan();
     private List<string> _data;
-    private ArrayList _dataArray;
     private Queue<string> _queue;
     private Stack<string> _stack;
 
-    [Params(1000,10000)]
+    [Params(100,1000,10000)]
     public int Iterations { get; set; }
     [GlobalSetup]
     public void Setup()
     {
         input = string.Concat(Enumerable.Repeat("This is an example sentence", Iterations));
         _data = Enumerable.Repeat("This is an example sentence", Iterations).ToList();
-        _dataArray = new ArrayList();
-        Enumerable.Repeat(_dataArray.Add("This is an example sentence"), Iterations);
         _queue = new Queue<string>();
         for (int i = 0; i < Iterations; i++)
         {
@@ -52,40 +49,33 @@ public class Bench
         }
 
     }
+
+
     [Benchmark]
     public void StringReplace() => input.Replace(searchTerm, replaceTerm);
     [Benchmark]
     public void SpanReplace() => ReplaceSpan(InputSpan, SearchTermSpan, ReplacetermSpan);
-    
-    //[Benchmark]
-    //public string StringSubString() => input[..20];
 
-    //[Benchmark]
-    //public ReadOnlySpan<char> SpanSlice() => InputSpan[..20];
+    [Benchmark]
+    public string StringSubString() => input.Substring(0, 20);
 
-    //[Benchmark]
-    //public bool StringStartsWith() => input.StartsWith(startsWith);
+    [Benchmark]
+    public ReadOnlySpan<char> SpanSlice() => InputSpan.Slice(0, 20);
 
-    //[Benchmark]
-    //public bool SpanStartsWith() => InputSpan.StartsWith(StarsWithSpan);
-    //[Benchmark]
-    //public bool TestString() => input.Equals(searchTerm);
-    //[Benchmark]
-    //public bool TestSpan() => MemoryExtensions.Equals(InputSpan, SearchTermSpan, StringComparison.Ordinal);
+    [Benchmark]
+    public bool StringStartsWith() => input.StartsWith(startsWith);
 
-    //[Benchmark]
-    //public bool ListContains() => _data.Contains("example");
-    //[Benchmark]
-    //public bool SpanContains() => CollectionsMarshal.AsSpan(_data).Contains("example");
+    [Benchmark]
+    public bool SpanStartsWith() => InputSpan.StartsWith(StarsWithSpan);
 
-    //[Benchmark]
-    //public bool ArrayListContains() => _dataArray.Contains("example");
-
-    //[Benchmark]
-    //public bool QueueContains() => _queue.Contains("example");
-
-    //[Benchmark]
-    //public bool StackContains() => _stack.Contains("example");
+    [Benchmark]
+    public bool ListContains() => _data.Contains("example");
+    [Benchmark]
+    public bool SpanContains() => CollectionsMarshal.AsSpan(_data).Contains("example");
+    [Benchmark]
+    public bool QueueContains() => _queue.Contains("example");
+    [Benchmark]
+    public bool StackContains() => _stack.Contains("example");
 
 
 
