@@ -1,5 +1,10 @@
 ﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Columns;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Exporters.Csv;
+using BenchmarkDotNet.Loggers;
 using BenchmarkDotNet.Order;
+using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
 using CommandLine.Text;
 using System.Collections;
@@ -14,9 +19,35 @@ public class Program
 }
 
 
+
+
 [MemoryDiagnoser]
+[Config(typeof(Config))]
 public class Bench
 {
+    public class Config : ManualConfig
+    {
+        public Config()
+        {
+            var config = ManualConfig.CreateEmpty()
+                .AddColumnProvider(DefaultColumnProviders.Instance)
+                .AddLogger(ConsoleLogger.Default);
+
+            var exporter = new CsvExporter(
+                CsvSeparator.CurrentCulture,
+                new SummaryStyle(
+                    cultureInfo: System.Globalization.CultureInfo.CurrentCulture,
+                    printUnitsInHeader: true,
+                    printUnitsInContent: false,
+                    timeUnit: Perfolizer.Horology.TimeUnit.Millisecond,
+                    sizeUnit: SizeUnit.KB
+
+                    ));
+            config.AddExporter(exporter);
+        }
+
+
+    }
     private string input;
     private readonly string searchTerm = "example";
     private readonly string replaceTerm = "sample";
@@ -30,7 +61,7 @@ public class Bench
     private Queue<string> _queue;
     private Stack<string> _stack;
 
-    [Params(100,1000,10000)]
+    [Params(100)]
     public int Iterations { get; set; }
     [GlobalSetup]
     public void Setup()
