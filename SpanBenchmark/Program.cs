@@ -18,8 +18,9 @@ public class Program
         var ctx = serviceProvider.GetService<ApplicationDbContext>();
         
 
-        //var userService = new UserService(ctx);
+        var userService = new UserService(ctx);
         //userService.GetEmployees().GetAwaiter().GetResult();
+        //userService.BulkUpsertUserDefault().GetAwaiter().GetResult();
         BenchmarkRunner.Run<EmployeeBench>();
         Console.ReadLine();
     }
@@ -45,12 +46,12 @@ public class EmployeeBench
         return true;
     }
 
-    [Benchmark]
-    public async Task<bool> BenchSpan()
-    {
-        await _userService.BulkUpsertUserSpan();
-        return true;
-    }
+    //[Benchmark]
+    //public async Task<bool> BenchSpan()
+    //{
+    //    await _userService.BulkUpsertUserSpan();
+    //    return true;
+    //}
 
 }
 

@@ -25,7 +25,7 @@ namespace SpanBenchmark.Data.Services
 
             try
             {
-                StreamWriter sw = new StreamWriter("C:\\Users\\hakan.akdogan\\source\\repos\\SpanBenchmark\\SpanBenchmark\\Test.txt");
+                StreamWriter sw = new StreamWriter("C:\\Users\\akdog\\source\\repos\\hakanakdogan\\SpanBenchmark\\Test.txt");
 
                 sw.WriteLine(jsonEmp);
 
@@ -47,20 +47,21 @@ namespace SpanBenchmark.Data.Services
             try
             {
                 //Pass the file path and file name to the StreamReader constructor
-                StreamReader sr = new StreamReader("C:\\Users\\hakan.akdogan\\source\\repos\\SpanBenchmark\\SpanBenchmark\\Test.txt");
+                StreamReader sr = new StreamReader("C:\\Users\\akdog\\source\\repos\\hakanakdogan\\SpanBenchmark\\SpanBenchmark\\Test.txt");
                 //Read the first line of text
                 employeesString = sr.ReadLine();
                 //Continue to read until you reach end of file
-                while (employeesString != null)
-                {
-                    //write the line to console window
-                    Console.WriteLine(employeesString);
-                    //Read the next line
-                    employeesString = sr.ReadLine();
-                }
+                //var deneme = sr.ReadLine();
+                //while (sr.ReadLine() != null)
+                //{
+                //    //write the line to console window
+                //    Console.WriteLine(employeesString);
+                //    //Read the next line
+                //    employeesString += sr.ReadLine();
+                //}
                 //close the file
                 sr.Close();
-                Console.ReadLine();
+                //Console.ReadLine();
             }
             catch (Exception e)
             {
@@ -112,10 +113,10 @@ namespace SpanBenchmark.Data.Services
                         modifiedUsers.Add(new UserDifferenceDto
                         {
                             User = user,
-                            Difference = FormatChangesToString(diff.Deserialize<Dictionary<string, string[]>>(new JsonSerializerOptions
-                            {
-                                NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.WriteAsString
-                            }))
+                            //Difference = FormatChangesToString(diff.Deserialize<Dictionary<string, string[]>>(new JsonSerializerOptions
+                            //{
+                            //    NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.WriteAsString
+                            //}))
                         });
                     }
 
@@ -128,6 +129,7 @@ namespace SpanBenchmark.Data.Services
                         user.Employee.RootElement.GetProperty("isActive").GetBoolean())
                     quittedEmployees.Add(user);
             }
+            Console.WriteLine("no error haha");
         }
 
 
@@ -139,20 +141,21 @@ namespace SpanBenchmark.Data.Services
             try
             {
                 //Pass the file path and file name to the StreamReader constructor
-                StreamReader sr = new StreamReader("C:\\Users\\hakan.akdogan\\source\\repos\\SpanBenchmark\\SpanBenchmark\\Test.txt");
+                StreamReader sr = new StreamReader("C:\\Users\\akdog\\source\\repos\\hakanakdogan\\SpanBenchmark\\SpanBenchmark\\Test.txt");
                 //Read the first line of text
                 employeesString = sr.ReadLine();
                 //Continue to read until you reach end of file
-                while (employeesString != null)
-                {
-                    //write the line to console window
-                    Console.WriteLine(employeesString);
-                    //Read the next line
-                    employeesString = sr.ReadLine();
-                }
+                //var deneme = sr.ReadLine();
+                //while (sr.ReadLine() != null)
+                //{
+                //    //write the line to console window
+                //    Console.WriteLine(employeesString);
+                //    //Read the next line
+                //    employeesString += sr.ReadLine();
+                //}
                 //close the file
                 sr.Close();
-                Console.ReadLine();
+                //Console.ReadLine();
             }
             catch (Exception e)
             {
@@ -205,10 +208,10 @@ namespace SpanBenchmark.Data.Services
                         modifiedUsers.Add(new UserDifferenceDto
                         {
                             User = user,
-                            Difference = FormatChangesToString(diff.Deserialize<Dictionary<string, string[]>>(new JsonSerializerOptions
-                            {
-                                NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.WriteAsString
-                            }))
+                            //Difference = FormatChangesToString(diff.Deserialize<Dictionary<string, string[]>>(new JsonSerializerOptions
+                            //{
+                            //    NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.WriteAsString
+                            //}))
                         });
                     }
 

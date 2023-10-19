@@ -10,6 +10,6 @@ namespace SpanBenchmark.Data.Dtos
     public class UserDifferenceDto
     {
         public User User { get; set; }
-        public string Difference { get; set; }
+        //public string Difference { get; set; }
     }
 }
